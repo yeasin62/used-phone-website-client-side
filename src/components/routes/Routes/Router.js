@@ -1,4 +1,6 @@
+import Blog from "../../pages/Blog/Blog";
 import Dashboard from "../../pages/Dashboard/Dashboard";
+import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import Login from "../../pages/Login/Login";
 import Products from "../../pages/Products/Products";
 import Signup from "../../pages/Signup/Signup";
@@ -20,9 +22,10 @@ const router = createBrowserRouter([
                 path: '/products',
                 element: <Products></Products>
             },
+            
             {
-                path: '/dashboard',
-                element: <Dashboard></Dashboard>
+                path: '/blog',
+                element: <Blog></Blog>
             },
             {
                 path: '/login',
@@ -32,8 +35,16 @@ const router = createBrowserRouter([
                 path: '/signup',
                 element: <Signup></Signup>
             },
+            {
+                path: '*',
+                element: <ErrorPage></ErrorPage>
+            },
         ]
-    }
+    },
+    {
+        path: '/dashboard',
+        element: <Dashboard></Dashboard>
+    },
 ]);
 
 export default router;
