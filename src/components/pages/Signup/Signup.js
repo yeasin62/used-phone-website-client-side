@@ -1,25 +1,35 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { authContext } from '../../../AuthProvider/AuthProvider';
 
 const Signup = () => {
     const { register,formState: { errors }, handleSubmit } = useForm();
     const {createUser,updateUserProfile} = useContext(authContext);
+    const [signupError, setSignupError] = useState('');
     const handleSignup = data => {
         console.log(data);
+        setSignupError('');
         createUser(data.email,data.password,data.seller)
         .then(result => {
             const user = result.user;
             console.log(user);
+            toast("User Created successfully");
             const userInfo = {
                 displayName: data.name,
             }
             updateUserProfile(userInfo)
             .then(()=> {})
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error);
+            });
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+            console.error(error.message);
+            setSignupError(error.message);
+
+        });
     }
     return (
         <div className='flex flex-col justify-center items-center my-20'>
@@ -51,7 +61,9 @@ const Signup = () => {
             <input type="checkbox" {...register("seller")} className="checkbox mr-2" value="Seller"/>
             <span className="label-text text-left text-base">Register for Seller Account</span> 
         </div>
-        
+        {
+            signupError && <p className='text-red-600'>{signupError}</p>
+        }
         <p className='py-2'><Link to={''} className="text-teal-700">Forget password?</Link></p>
       <input type="submit" className='btn btn-block' />
       <p className='py-2'>Already have an accout? <span><Link  className="text-teal-700" to={'/login'}>Login</Link></span></p>
