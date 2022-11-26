@@ -17,6 +17,24 @@ const Signup = () => {
             const user = result.user;
             console.log(user);
             toast("User Created successfully");
+            const createUserToDB = {
+                userName: data.name,
+                userEmail: data.email,
+                sellerAccount: data.seller
+            }
+            fetch('http://localhost:5000/users',{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(createUserToDB)
+        })
+        .then(res => res.json())
+        .then(data=> {
+            console.log(data);
+        })
+
+
             const userInfo = {
                 displayName: data.name,
             }

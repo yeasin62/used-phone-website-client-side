@@ -67,7 +67,7 @@ const SingleProduct = () => {
               </table>
 
               <label htmlFor="popupDetails" className="btn btn-active my-4">Book Now</label>
-              <BookingModal></BookingModal>
+              <BookingModal phone={phone}></BookingModal>
             </div>
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
