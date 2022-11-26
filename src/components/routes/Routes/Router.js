@@ -3,6 +3,7 @@ import Dashboard from "../../pages/Dashboard/Dashboard";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import Login from "../../pages/Login/Login";
 import Products from "../../pages/Products/Products";
+import SingleProduct from "../../pages/Products/SingleProduct/SingleProduct";
 import Signup from "../../pages/Signup/Signup";
 import PrivateRoute from "../../PrivateRoute/PrivateRoute";
 
@@ -23,6 +24,11 @@ const router = createBrowserRouter([
                 path: '/products',
                 element: <Products></Products>,
                 loader: async ()=> fetch('http://localhost:5000/phones')
+            },
+            {
+                path: '/phone/:id',
+                element: <SingleProduct></SingleProduct>,
+                loader: async ({params})=> fetch(`http://localhost:5000/phone/${params.id}`)
             },
             
             {
