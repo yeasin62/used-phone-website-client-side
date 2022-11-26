@@ -1,5 +1,6 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import BookingModal from "../BookingModal/BookingModal";
 
 const SingleProduct = () => {
   const phone = useLoaderData();
@@ -65,7 +66,8 @@ const SingleProduct = () => {
                 </tbody>
               </table>
 
-              <button className="btn btn-active my-4">Book Now</button>
+              <label htmlFor="popupDetails" className="btn btn-active my-4">Book Now</label>
+              <BookingModal></BookingModal>
             </div>
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">

@@ -1,4 +1,5 @@
 import Blog from "../../pages/Blog/Blog";
+import AddProduct from "../../pages/Dashboard/AddProduct/AddProduct";
 import Dashboard from "../../pages/Dashboard/Dashboard";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import Login from "../../pages/Login/Login";
@@ -51,7 +52,13 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        children: [
+            {
+                path: 'add',
+                element: <AddProduct></AddProduct>
+            }
+        ]
     },
 ]);
 
