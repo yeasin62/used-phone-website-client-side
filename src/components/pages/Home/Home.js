@@ -5,7 +5,7 @@ import Promo from './Promo/Promo';
 
 const Home = () => {
     return (
-        <div className='md:w-4/5 mx-auto'>
+        <div>
             <HomeBanner></HomeBanner>
             <Categories></Categories>
             <Promo></Promo>

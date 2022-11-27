@@ -35,7 +35,7 @@ const AddProduct = () => {
         .then(data=> {
             console.log(data);
             if(data.acknowledged){
-                toast.success('Appointment successful');
+                toast.success('Product Added Successfully');
             }
             else {
                 toast.error(data.message)
@@ -110,7 +110,7 @@ const AddProduct = () => {
                         
                         <div className="col-span-full">
                             <label htmlFor="location" className="text-sm">Location</label>
-                            <input id="location" type="number" {...register("location",{required: "Location is required"})} placeholder="Location" className="input input-bordered w-full" required/>
+                            <input id="location" type="text" {...register("location",{required: "Location is required"})} placeholder="Location" className="input input-bordered w-full" required/>
                             {errors.location && <p className='text-red-600' role="alert">{errors.location?.message}</p>}
                         </div>
                         
@@ -121,7 +121,7 @@ const AddProduct = () => {
                         </div>
                         <div className="col-span-full">
                             <label htmlFor="details" className="text-sm">Specification & details</label>
-                            <textarea id="details" type="textarea" {...register("details",{required: "Please write details about this product"})}  placeholder="Phone details" className="input input-bordered w-full" required/>
+                            <textarea id="details" type="textarea" {...register("details",{required: "Please write details about this product"})}  placeholder="Product details" className="input input-bordered w-full" required/>
                             {errors.details && <p className='text-red-600' role="alert">{errors.details?.message}</p>}
 
                             <button type="submit" className="btn btn-block my-2">Submit</button>
