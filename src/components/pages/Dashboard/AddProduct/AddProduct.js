@@ -51,7 +51,7 @@ const AddProduct = () => {
         
     }
     return (
-        <section className="p-6 md:w-6/12 mx-auto mt-96">
+        <section className="p-6 md:w-6/12 mx-auto">
             <h2 className='text-center text-3xl'>Add New Item</h2>
             <form onSubmit={handleSubmit(handleProductAdd)} className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid shadow-md p-4 rounded-lg">
                 <fieldset className="grid grid-cols-1 gap-6 rounded-md shadow-sm dark:bg-gray-900">
