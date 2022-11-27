@@ -15,6 +15,7 @@ const SingleProduct = () => {
     productName,
     category,
     isVerifiedSeller,
+    postedOn
   } = phone;
 
   return (
@@ -27,39 +28,36 @@ const SingleProduct = () => {
               <table className="table w-full">
                 <thead>
                   <tr>
-                    <th></th>
                     <th>Title</th>
                     <th>Details</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th>1</th>
+                    <td>Published on:</td>
+                    <td>{postedOn}</td>
+                  </tr>
+                  <tr>
                     <td>Brand</td>
                     <td>{category}</td>
                   </tr>
                   <tr>
-                    <th>2</th>
                     <td>Location</td>
                     <td>{location}</td>
                   </tr>
                   <tr>
-                    <th>3</th>
                     <td>Seller Name</td>
                     <td>{name}</td>
                   </tr>
                   <tr>
-                    <th>4</th>
                     <td>Year of use</td>
                     <td>{yearOfUse}</td>
                   </tr>
                   <tr>
-                    <th>5</th>
                     <td>Original Price</td>
                     <td>{originalPrice} Tk</td>
                   </tr>
                   <tr>
-                    <th>6</th>
                     <td>Resale Price</td>
                     <td>{resalePrice} Tk</td>
                   </tr>

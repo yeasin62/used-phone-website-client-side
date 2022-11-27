@@ -1,11 +1,15 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { format } from 'date-fns';
 import { authContext } from '../../../../AuthProvider/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
     const {user} = useContext(authContext);
+    const date = format(new Date(), 'PP');
     const { register,formState:{errors}, handleSubmit } = useForm();
+    const navigate = useNavigate();
 
 
     const handleProductAdd = (data )=> {
@@ -21,7 +25,8 @@ const AddProduct = () => {
             yearOfUse: data.yearOfUse,
             productImage: data.productImage,
             details: data.details,
-            location: data.location
+            location: data.location,
+            postedOn: date,
         }
         console.log(submitPhone);
         fetch('http://localhost:5000/add',{
@@ -36,6 +41,7 @@ const AddProduct = () => {
             console.log(data);
             if(data.acknowledged){
                 toast.success('Product Added Successfully');
+                navigate('/dashboard/my-products')
             }
             else {
                 toast.error(data.message)
