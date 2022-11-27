@@ -1,4 +1,5 @@
 import Blog from "../../pages/Blog/Blog";
+import Category from "../../pages/Category/Category";
 import AddProduct from "../../pages/Dashboard/AddProduct/AddProduct";
 import AllBuyers from "../../pages/Dashboard/Admin/AllBuyers/AllBuyers";
 import AllSellers from "../../pages/Dashboard/Admin/AllSellers/AllSellers";
@@ -7,6 +8,7 @@ import Dashboard from "../../pages/Dashboard/Dashboard";
 import MyBuyers from "../../pages/Dashboard/Seller/MyBuyers/MyBuyers";
 import MyProducts from "../../pages/Dashboard/Seller/MyProducts/MyProducts";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
+import Categories from "../../pages/Home/Categories/Categories";
 import Login from "../../pages/Login/Login";
 import Products from "../../pages/Products/Products";
 import SingleProduct from "../../pages/Products/SingleProduct/SingleProduct";
@@ -37,6 +39,11 @@ const router = createBrowserRouter([
                 loader: async ({params})=> fetch(`http://localhost:5000/phone/${params.id}`)
             },
             
+            {
+                path: '/category/',
+                element: <Categories></Categories>,
+                loader: ()=> fetch('http://localhost:5000/categories/')
+            },
             {
                 path: '/blog',
                 element: <Blog></Blog>
