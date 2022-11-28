@@ -16,7 +16,7 @@ const AllSellers = () => {
         fetch(`http://localhost:5000/users/admin/${id}`,{
             method: 'PUT',
             headers: {
-                authorization: `bearer ${localStorage.getItem('accessToken')}`
+                authorization: `bearer ${localStorage.getItem('accessToken')}`,
             }
         })
         .then(res => res.json())
@@ -30,7 +30,7 @@ const AllSellers = () => {
     }
     return (
         <div>
-            <h2>All Sellers</h2>
+            <h2 className='text-center text-2xl font-bold py-2'>All Sellers</h2>
             <div className="overflow-x-auto">
   <table className="table w-full">
     
@@ -46,16 +46,16 @@ const AllSellers = () => {
     <tbody>
       
       {
-        sellers.map((seller,i) => <tr key={i}>
+        sellers.map((seller,i) => <tr key={seller._id}>
             <th>{i+1}</th>
             <td>{seller.userName}</td>
             <td>{seller.userEmail}</td>
             <td>
                 {
-                    seller?.role !== 'admin' ? <button onClick={()=>handleMakeAdmin(seller._id)} className='btn btn-primary btn-sm'>Make Admin</button> : <button className='btn btn-info' disabled> Admin</button>
+                    seller?.role !== 'admin' ? <button onClick={()=> handleMakeAdmin(seller._id)} className='btn btn-primary btn-sm'>Make Admin</button> : <button className='btn btn-info' disabled> Admin</button>
                 }
             </td>
-            <td><button className='btn btn-default btn-sm'>Delete</button></td>
+            <td><button className='btn btn-error text-white btn-sm'>Delete</button></td>
           </tr>)
       }
       

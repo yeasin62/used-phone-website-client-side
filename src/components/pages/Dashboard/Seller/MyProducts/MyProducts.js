@@ -43,8 +43,8 @@ const MyProducts = () => {
                     </thead>
                     <tbody>
 
-                    {
-                        orders?.map((order,i) => <tr key={i}>
+                    { orders &&
+                        orders?.map((order,i) => <tr key={order._id}>
                             <th>
                             <label>
                                 <input type="checkbox" className="checkbox" />
