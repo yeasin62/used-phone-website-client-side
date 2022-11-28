@@ -84,7 +84,7 @@ const router = createBrowserRouter([
                 element: <MyBuyers></MyBuyers>
             },
             {
-                path: 'all-sellers',
+                path: 'sellers',
                 element: <AllSellers></AllSellers>
             },
             {

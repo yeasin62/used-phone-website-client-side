@@ -44,7 +44,7 @@ const MyProducts = () => {
                     <tbody>
 
                     {
-                        orders.map((order,i) => <tr key={i}>
+                        orders?.map((order,i) => <tr key={i}>
                             <th>
                             <label>
                                 <input type="checkbox" className="checkbox" />

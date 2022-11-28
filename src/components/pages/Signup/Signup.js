@@ -3,13 +3,22 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { authContext } from '../../../AuthProvider/AuthProvider';
+import useToken from '../../../Hooks/useToken';
 
 const Signup = () => {
     const { register,formState: { errors }, handleSubmit } = useForm();
     const {createUser,updateUserProfile} = useContext(authContext);
     const [signupError, setSignupError] = useState('');
+    
+    const [createdUserEmail, setCreatedUserEmail] = useState('');
+    const [token] = useToken(createdUserEmail);
+
     const navigate = useNavigate();
 
+
+    if(token){
+        navigate('/');
+    }
     const handleSignup = data => {
         setSignupError('');
         createUser(data.email,data.password,data.seller)
@@ -40,7 +49,8 @@ const Signup = () => {
             }
             updateUserProfile(userInfo)
             .then(()=> {
-                getUserToken(data.email);
+                setCreatedUserEmail(data.email);
+                // getUserToken(data.email);
                 //navigate('/');
                 //console.log(data.email);
             })
@@ -54,17 +64,17 @@ const Signup = () => {
 
         });
     }
-    const getUserToken = email => {
-        fetch(`http://localhost:5000/jwt?email=${email}`)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if(data.accessToken){
-                localStorage.setItem('accessToken', data.accessToken);
-                navigate('/');
-            }
-        })
-    }
+    // const getUserToken = email => {
+    //     fetch(`http://localhost:5000/jwt?email=${email}`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(data);
+    //         if(data.accessToken){
+    //             localStorage.setItem('accessToken', data.accessToken);
+    //             navigate('/');
+    //         }
+    //     })
+    // }
     return (
         <div className='flex flex-col justify-center items-center my-20'>
       <div className="w-96 p-8 shadow-xl rounded-3x card ">
