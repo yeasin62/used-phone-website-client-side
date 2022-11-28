@@ -14,6 +14,7 @@ import Products from "../../pages/Products/Products";
 import SingleProduct from "../../pages/Products/SingleProduct/SingleProduct";
 import Signup from "../../pages/Signup/Signup";
 import PrivateRoute from "../../PrivateRoute/PrivateRoute";
+import AdminRoute from "../AdminRoute/AdminRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../../layout/Main/Main");
@@ -85,11 +86,11 @@ const router = createBrowserRouter([
             },
             {
                 path: 'sellers',
-                element: <AllSellers></AllSellers>
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
             {
-                path: 'all-buyers',
-                element: <AllBuyers></AllBuyers>
+                path: 'buyers',
+                element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
             },
             {
                 path:'orders',
