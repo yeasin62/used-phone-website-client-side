@@ -9,8 +9,8 @@ const Signup = () => {
     const {createUser,updateUserProfile} = useContext(authContext);
     const [signupError, setSignupError] = useState('');
     const navigate = useNavigate();
+
     const handleSignup = data => {
-        console.log(data);
         setSignupError('');
         createUser(data.email,data.password,data.seller)
         .then(result => {
@@ -40,7 +40,9 @@ const Signup = () => {
             }
             updateUserProfile(userInfo)
             .then(()=> {
-                navigate('/');
+                getUserToken(data.email);
+                //navigate('/');
+                //console.log(data.email);
             })
             .catch(error => {
                 console.error(error);
@@ -51,6 +53,17 @@ const Signup = () => {
             setSignupError(error.message);
 
         });
+    }
+    const getUserToken = email => {
+        fetch(`http://localhost:5000/jwt?email=${email}`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.accessToken){
+                localStorage.setItem('accessToken', data.accessToken);
+                navigate('/');
+            }
+        })
     }
     return (
         <div className='flex flex-col justify-center items-center my-20'>
