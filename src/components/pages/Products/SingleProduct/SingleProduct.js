@@ -19,7 +19,7 @@ const SingleProduct = () => {
   } = phone;
 
   return (
-    <div class="md:w-3/4 p-4 text-center bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700 my-20 mx-auto">
+    <div className="md:w-3/4 p-4 text-center bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700 my-20 mx-auto">
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
