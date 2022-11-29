@@ -1,8 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import ConfirmationModal from '../../../../../Shared/ConfirmationModal/ConfirmationModal';
 
 const AllBuyers = () => {
+    const [deletingBuyer, setDeletingBuyer] = useState(null);
+    const closeModal = ()=> {
+        setDeletingBuyer(null);
+    }
     const {data : sellers = [], refetch}= useQuery({
         queryKey: ['sellers'],
         queryFn: async ()=> {
@@ -26,6 +31,24 @@ const AllBuyers = () => {
                 toast.success('Admin made successfully');
                 refetch();
             }
+        })
+    }
+
+    const handleDeleteBuyer = buyer => {
+        fetch(`http://localhost:5000/buyer/${buyer._id}`,{
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+
+        })
+        .then(res=> res.json())
+        .then(data => {
+            if(data.deletedCount > 0){
+                toast.success("Buyer Deleted successfully")
+                refetch();
+            };
+            
         })
     }
     return (
@@ -55,7 +78,13 @@ const AllBuyers = () => {
                     seller?.role !== 'admin' ? <button onClick={()=> handleMakeAdmin(seller._id)} className='btn btn-primary btn-sm'>Make Admin</button> : <button className='btn btn-info' disabled> Admin</button>
                 }
             </td>
-            <td><button className='btn btn-error text-white btn-sm'>Delete</button></td>
+            <td>
+
+            <label onClick={()=>setDeletingBuyer(seller)} htmlFor="confirmation-modal" className="btn btn-error text-white btn-sm">Delete</label>
+                {
+                   deletingBuyer && <ConfirmationModal deletingSeller={deletingBuyer} title={"Are you sure you want to delete?"} message={"If you delete it can't be undone"} closeModal={closeModal} modalData={deletingBuyer} successButtonName="Delete" successAction = {handleDeleteBuyer}></ConfirmationModal> 
+                }
+            </td>
           </tr>)
       }
       

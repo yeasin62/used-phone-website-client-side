@@ -102,7 +102,7 @@ const router = createBrowserRouter([
                 element: <AdminRoute><Advertise></Advertise></AdminRoute>
             },
             {
-                path:'/dashboard/orders',
+                path:'/dashboard/my-orders',
                 element: <MyOrders></MyOrders>
             }
         ]

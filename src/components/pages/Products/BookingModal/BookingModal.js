@@ -12,18 +12,23 @@ const BookingModal = ({phone}) => {
     //const {} = phone;
     console.log(phone);
     const {user} = useContext(authContext);
+    const navigate = useNavigate();
 
     const { register, formState: { errors }, handleSubmit,refetch } = useForm();
+    
 
     const submitModalForm = data => {
         //console.log(data);
         
         const handleBooking = {
+            productImage: phone.productImage,
             buyerNmae: phone.productName,
+            price: phone.resalePrice,
             buyerEmail: user?.email,
             buyerPhone: data.phone,
             itemName: phone.productName,
-            location: data.location
+            location: data.location,
+            isBooked: true
         }
         console.log(handleBooking);
         fetch('http://localhost:5000/booking',{
@@ -38,6 +43,7 @@ const BookingModal = ({phone}) => {
             console.log(data);
             if(data.acknowledged){
                 toast.success('Booking Successful');
+                navigate('/dashboard/my-orders')
                 refetch();
             }
             else {
@@ -45,6 +51,7 @@ const BookingModal = ({phone}) => {
             }
         })
     }
+    console.log(phone);
     return (
         <div>
             <input type="checkbox" id="popupDetails" className="modal-toggle" />
@@ -54,6 +61,7 @@ const BookingModal = ({phone}) => {
             <h3 className="font-bold text-lg">Book This Phone</h3>
           <form onSubmit={handleSubmit(submitModalForm)}>
           <div className="py-4 flex flex-col gap-y-2">
+            <input type="hidden" value={phone.productImage} />
             <input type="text" name="productName" value={phone.productName} className="input input-bordered w-full" disabled/>
             <input type="text" {...register("fullName", { required: "Name is required" })} defaultValue={user?.displayName} name="fullName" placeholder="Full Name" className="input input-bordered w-full" />
             {errors.fullName?.type === 'required' && <p role="alert" className="text-red-600">Name is required</p>}

@@ -32,10 +32,11 @@ const Dashboard = () => {
                         </>
                     }
                     
-                  
+                    <li><Link to={'/dashboard/advertise'}>Advertise</Link></li>
                     <li><Link to={'/dashboard/add'}>Add New Product</Link></li>
                     <li><Link to={'/dashboard/my-products'}>My Products</Link></li>
-                    <li><Link to={'/dashboard/advertise'}>Advertise</Link></li>
+                    <li><Link to={'/dashboard/my-orders'}>My Orders</Link></li>
+                    
                    
                     </ul>
                 
