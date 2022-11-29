@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { authContext } from '../../../../../AuthProvider/AuthProvider';
 
 const MyProducts = () => {
     const {user} = useContext(authContext);
     const url = `http://localhost:5000/orders?email=${user?.email}`;
 
-    const {data : orders = []} = useQuery({
+    const {data : orders = [], refetch} = useQuery({
       queryKey: ['orders', user?.email],
       queryFn: async ()=> {
         const res = await fetch(url,{
@@ -18,7 +19,40 @@ const MyProducts = () => {
         return data;
       }  
     })
-    console.log(orders);
+    
+    const handleAdvertise = id => {
+        fetch(`http://localhost:5000/phones/advertise/${id}`,{
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`,
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.modifiedCount > 0){
+                toast.success('Advertise Published successfully');
+                refetch();
+            }
+        })
+    }
+
+    const handleAdvertiseRemove = id => {
+        fetch(`http://localhost:5000/phones/advertised/${id}`,{
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`,
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.modifiedCount > 0){
+                toast.success('Advertise Removed successfully');
+                refetch();
+            }
+        })
+    }
     return (
         <div>
             <h2 className='text-2xl font-bold text-center mb-2'>My Products</h2>
@@ -59,16 +93,16 @@ const MyProducts = () => {
                             <td>{order.category}</td>
                             <td>{order.resalePrice}</td>
                             <th>
-                            <button className="btn btn-ghost btn-xs">Advertise</button>
+                            {
+                                order?.isAdvertised !== true ? <button onClick={()=>handleAdvertise(order._id)} className="btn btn-success btn-xs">Advertise</button> : <button onClick={()=>handleAdvertiseRemove(order._id)} className="btn btn-success btn-xs">Remove Advertise</button>
+                            }
                             </th>
                             <th>
-                            <button className="btn btn-ghost btn-xs">Available / Sold</button>
+                            <button className="btn btn-error btn-xs">Available / Sold</button>
                             </th>
                         </tr>)
                     }
                     </tbody>
-
-                    
                 </table>
                 </div>
         </div>

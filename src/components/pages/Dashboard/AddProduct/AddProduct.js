@@ -27,6 +27,7 @@ const AddProduct = () => {
             details: data.details,
             location: data.location,
             postedOn: date,
+            isProductAvailable: true
         }
         console.log(submitPhone);
         fetch('http://localhost:5000/add',{

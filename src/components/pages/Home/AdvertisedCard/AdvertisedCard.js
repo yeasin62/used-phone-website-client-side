@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaCheckCircle } from 'react-icons/fa';
 
 const AdvertisedCard = ({advertisedItem}) => {
-    const {productImage, category, resalePrice,productName,postedOn,location,_id } = advertisedItem;
+    const {productImage, category, resalePrice,productName,postedOn,location,_id,isVerifiedSeller } = advertisedItem;
     return (
         
 
@@ -22,7 +22,10 @@ const AdvertisedCard = ({advertisedItem}) => {
     </p>
         <div className='flex flex-row justify-between items-center'>
             <Link to={`/phone/${_id}`} className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 dark:focus:ring-blue-800">View Details</Link>
-            <span><FaCheckCircle className='text-xl text-teal-600' title='Verified'></FaCheckCircle> Verified</span>
+            {
+                isVerifiedSeller === true ? <span><FaCheckCircle className='text-xl text-teal-600' title='Seller Verified'></FaCheckCircle></span> : <span><FaCheckCircle className='text-xl text-neutral-500' title='Seller Unverified'></FaCheckCircle></span>
+            }
+            
         </div>
     </div>
 </div>

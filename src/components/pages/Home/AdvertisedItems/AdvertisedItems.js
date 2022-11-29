@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import AdvertisedCard from '../AdvertisedCard/AdvertisedCard';
 
 const AdvertisedItems = () => {
@@ -13,7 +14,7 @@ const AdvertisedItems = () => {
             return data;
         }
     })
-    
+
     return (
         <div className='md:w-4/5 mx-auto my-20'>
             <h2 className='text-2xl font-bold text-center mb-8'>Advertisement</h2>

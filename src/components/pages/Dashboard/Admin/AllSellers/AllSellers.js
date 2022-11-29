@@ -28,6 +28,23 @@ const AllSellers = () => {
             }
         })
     }
+
+    const handleVerify = id => {
+        fetch(`http://localhost:5000/seller/verified/${id}`,{
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`,
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.modifiedCount > 0){
+                toast.success('Seller Verified successfully');
+                refetch();
+            }
+        })
+    }
     return (
         <div>
             <h2 className='text-center text-2xl font-bold py-2'>All Sellers</h2>
@@ -39,6 +56,7 @@ const AllSellers = () => {
         <th></th>
         <th>Name</th>
         <th>Email</th>
+        <th>Verify</th>
         <th>Admin</th>
         <th>Delete</th>
       </tr>
@@ -50,9 +68,10 @@ const AllSellers = () => {
             <th>{i+1}</th>
             <td>{seller.userName}</td>
             <td>{seller.userEmail}</td>
+            <td>{seller?.isVerifiedSeller !== true ? <button onClick={()=> handleVerify(seller._id)} className='btn btn-primary btn-sm'>Verify Seller</button> : <button className='btn btn-info btn-sm' disabled> Seller Verified</button>}</td>
             <td>
                 {
-                    seller?.role !== 'admin' ? <button onClick={()=> handleMakeAdmin(seller._id)} className='btn btn-primary btn-sm'>Make Admin</button> : <button className='btn btn-info' disabled> Admin</button>
+                    seller?.role !== 'admin' ? <button onClick={()=> handleMakeAdmin(seller._id)} className='btn btn-primary btn-sm'>Make Admin</button> : <button className='btn btn-info btn-sm' disabled> Admin</button>
                 }
             </td>
             <td><button className='btn btn-error text-white btn-sm'>Delete</button></td>

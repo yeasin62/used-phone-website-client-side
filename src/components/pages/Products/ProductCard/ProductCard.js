@@ -1,8 +1,9 @@
 import React from 'react';
+import { FaCheckCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const ProductCard = ({phone}) => {
-    const {productImage,productName,location, _id,resalePrice,postedOn} = phone;
+    const {productImage,productName,location, _id,resalePrice,postedOn, isVerifiedSeller} = phone;
     return (
         
 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -16,7 +17,12 @@ const ProductCard = ({phone}) => {
         <span>Price: {resalePrice} Tk</span>
         <span>Location: {location}</span>
     </p>
+        <div className='flex justify-between items-center'>
         <Link to={`/phone/${_id}`} className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 dark:focus:ring-blue-800">View Details</Link>
+        {
+                isVerifiedSeller === true ? <span><FaCheckCircle className='text-xl text-teal-600' title='Seller Verified'></FaCheckCircle></span> : <span><FaCheckCircle className='text-xl text-neutral-500' title='Seller Unverified'></FaCheckCircle></span>
+            }
+        </div>
     </div>
 </div>
 
