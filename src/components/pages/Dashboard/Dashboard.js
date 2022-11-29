@@ -8,6 +8,7 @@ import Header from '../../Header/Header';
 const Dashboard = () => {
     const {user} = useContext(authContext);
     const [isAdmin] = useAdmin(user?.email);
+    console.log(isAdmin);
     
     return (
         <div>
@@ -31,9 +32,11 @@ const Dashboard = () => {
                         </>
                     }
                     
+                  
                     <li><Link to={'/dashboard/add'}>Add New Product</Link></li>
                     <li><Link to={'/dashboard/my-products'}>My Products</Link></li>
                     <li><Link to={'/dashboard/advertise'}>Advertise</Link></li>
+                   
                     </ul>
                 
                 </div>
